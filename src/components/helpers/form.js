@@ -1,30 +1,8 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 "use client";
 
 import { useState } from "react";
 
 export default function Form() {
-  const [firstname, setFirstname] = useState("");
-
-  //   const [middlename, setMiddlename] = useState("");
-  //   const [lastname, setLastname] = useState("");
-  //   const [description, setDescription] = useState("");
-  //   const [date, setDate] = useState("");
-  //   const [isMale, setIsMale] = useState(false);
-
   const [formData, setFormData] = useState({
     firstname: "",
     middlename: "",
@@ -39,7 +17,7 @@ export default function Form() {
     const { name, type, checked, value } = e.target;
     setFormData({
       ...formData,
-      [name]: type === 'checkbox' ? checked : value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
