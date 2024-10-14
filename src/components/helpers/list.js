@@ -1,63 +1,56 @@
+"use client";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { RxUpdate } from "react-icons/rx";
 
-export default function List() {
+export default function List({ data, onDeletePerson }) {
   return (
     <div>
-      <div className="px-4 sm:px-0">
-        <h3 className="text-base font-semibold leading-7 text-gray-900">
-          Applicant Information
-        </h3>
-        <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-500">
-          Personal details and application.
-        </p>
-      </div>
-      <div className="mt-6 border-t border-gray-100">
-        <dl className="divide-y divide-gray-100">
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Full name
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Margot Foster
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Application for
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Backend Developer
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Email address
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              margotfoster@example.com
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              Salary expectation
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              $120,000
-            </dd>
-          </div>
-          <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-            <dt className="text-sm font-medium leading-6 text-gray-900">
-              About
-            </dt>
-            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-              Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-              incididunt cillum culpa consequat. Excepteur qui ipsum aliquip
-              consequat sint. Sit id mollit nulla mollit nostrud in ea officia
-              proident. Irure nostrud pariatur mollit ad adipisicing
-              reprehenderit deserunt qui eu.
-            </dd>
-          </div>
-        </dl>
-      </div>
+      <h1 className="text-xl">Persons List</h1>
+      <h1 className="text-xl">{data.firstname}</h1>
+
+      {data && data.length > 0 ? (
+        <ul role="list" className="divide-y divide-gray-100">
+          {data.map((person) => (
+            <li
+              key={person.id || person.email}
+              className="flex justify-between gap-x-6 py-5"
+            >
+              <div className="flex min-w-0 gap-x-4">
+                <div className="min-w-0 flex-auto">
+                  <p className="text-sm leading-6 text-gray-900">
+                    <span className="font-bold">Name: </span>
+                    {person.firstname} {person.middlename} {person.lastname}
+                  </p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                    <span className="font-bold">Email: </span>
+                    {person.email}
+                  </p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                    <span className="font-bold">Date of birth: </span>{" "}
+                    {person.birthdate}
+                  </p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                    <span className="font-bold">Description: </span>
+                    {person.description}
+                  </p>
+                  <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                    <span className="font-bold">Gender: </span>
+                    {person.gender ? "Male" : "Female"}
+                  </p>
+                </div>
+              </div>
+              <div onClick={() => onDeletePerson(person.id)}>
+                <RiDeleteBin6Line size={30} />
+              </div>
+              <div>
+                <RxUpdate size={30} />
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No persons available.</p>
+      )}
     </div>
   );
 }
